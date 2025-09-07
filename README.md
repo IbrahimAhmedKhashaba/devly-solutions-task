@@ -1,61 +1,208 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# README
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Project:** Smart Clinic - Technical Assessment
 
-## About Laravel
+**For:** Devly Solutions
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🧭 Overview
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This project is an **Employee Management System** implemented fully according to the provided technical assessment specifications. It is built with Laravel and covers CRUD operations for Employees and Departments, RESTful API, exporting reports (Excel/PDF), and action logging to a dedicated file.
 
-## Learning Laravel
+> Every part of the requirements was implemented precisely — migrations, seeders, validations, filters, and exports.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## ✅ Key Features
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* Full CRUD for employees (Name, Email, Department, Salary).
+* Departments module with One-to-Many relationship (each employee belongs to a department).
+* Employee list with department name, filter by department, and pagination (10 rows/page).
+* RESTful API for employees, protected with Laravel Sanctum token auth.
+* Export employees list to Excel (XLSX) and PDF with department filter option.
+* Logging of important actions (created, updated, deleted) to a dedicated log file `storage/logs/employee.log` including actor info (id, name, email), IP, and route.
+* Migrations & Seeders for Departments and Employees.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🛠️ Tech Stack
 
-### Premium Partners
+* PHP 8.2+
+* Laravel 11
+* MySQL
+* Laravel Sanctum (API auth)
+* maatwebsite/excel (Excel export)
+* barryvdh/laravel-dompdf (PDF export)
+* Monolog (logging)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## 🔧 Setup (Local)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. Clone the project:
 
-## Code of Conduct
+```bash
+git clone <repo-url>
+cd <repo-folder>
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. Copy environment file:
 
-## Security Vulnerabilities
+```bash
+cp .env.example .env
+# Edit DB_CONNECTION, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+3. Install dependencies:
 
-## License
+```bash
+composer install
+npm install && npm run build # if frontend exists
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. Generate app key:
+
+```bash
+php artisan key:generate
+```
+
+5. Run migrations and seeders:
+
+```bash
+php artisan migrate --seed
+```
+
+6. Link storage (for exports and file access):
+
+```bash
+php artisan storage:link
+```
+
+7. Clear caches (optional):
+
+```bash
+php artisan config:clear
+php artisan route:clear
+php artisan cache:clear
+```
+
+8. Start local server:
+
+```bash
+php artisan serve
+```
+
+---
+
+## 📦 Migrations & Seeders
+
+* `create_departments_table` — Departments table.
+* `create_employees_table` — Employees table (id, name, email, salary, department\_id, status, timestamps).
+* Seeders: DepartmentsSeeder & EmployeesSeeder.
+
+---
+
+## 🔐 Authentication
+
+* Web uses `web` guard (session-based).
+* API is protected with **Sanctum tokens**:
+
+  * `POST /api/auth/login` with {email, password} returns `token`.
+  * Use header `Authorization: Bearer {token}` for protected API requests.
+
+---
+
+## 🔗 API — Postman Collection
+
+All API endpoints are documented in Postman collection:
+👉 [https://documenter.getpostman.com/view/40282253/2sB3Hkr1dw](https://documenter.getpostman.com/view/40282253/2sB3Hkr1dw)
+
+This includes login, employees CRUD, and export endpoints.
+
+---
+
+## 🔁 Exports
+
+Two approaches available:
+
+### 1. Direct download (stream)
+
+* Excel: Generates `employees.xlsx` via `EmployeesExport`.
+* PDF: Generates PDF from `dashboard.employees.print` view.
+
+### 2. Save & return URL
+
+* Files are saved under `storage/app/public/exports`.
+* Returns public URL via `Storage::disk('public')->url($path)`.
+* Recommended for large exports or async jobs.
+
+---
+
+## 📝 Logging
+
+* Custom channel in `config/logging.php`:
+
+```php
+'employee' => [
+    'driver' => 'single',
+    'path' => storage_path('logs/employee.log'),
+    'level' => 'info',
+],
+```
+
+* Logs are recorded inside `Employee` model events: `created`, `updated`, `deleted`.
+* Context includes: `action`, `actor` (id, name, email, guard), `employee`/`changes`, `ip`, `route`.
+
+---
+
+## ✅ Main Endpoints
+
+* `POST /api/auth/login` — Login (returns token).
+* `POST /api/auth/logout` — Logout (delete token).
+* `GET /api/employees` — List employees (with `?department=ID` & pagination).
+* `POST /api/employees` — Create employee.
+* `PUT /api/employees/{id}` — Update employee.
+* `DELETE /api/employees/{id}` — Delete employee.
+* `GET /api/employees/export/{department?}/{type}` — Export (`type = excel|pdf`).
+
+---
+
+## 🧪 Testing
+
+* PHPUnit ready (`phpunit.xml`).
+* API can be tested via Postman collection.
+
+---
+
+## ⚙️ Deployment
+
+* Run:
+
+```bash
+composer install --optimize-autoloader --no-dev
+php artisan migrate --force
+```
+
+* Configure `.env` (DB, APP\_KEY, APP\_ENV).
+* Run queue workers if needed:
+
+```bash
+php artisan queue:work --tries=3
+```
+
+* Ensure storage permissions and `php artisan storage:link`.
+
+---
+
+## Final Notes
+
+* Code quality, documentation, and compliance with requirements are ensured.
+* Extensions such as Roles & Permissions, Audit history, or Export history can be easily added.
+
+---
+
+## Contact
+
+**Devly Solutions**
+Author: Ibrahim Khashaba
