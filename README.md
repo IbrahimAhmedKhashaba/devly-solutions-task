@@ -93,6 +93,7 @@ php artisan serve
 
 ---
 
+### 🔹 Authentication
 📦 Migrations & Seeders
 
 create_departments_table → Departments
