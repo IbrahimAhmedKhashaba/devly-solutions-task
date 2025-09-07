@@ -90,7 +90,9 @@ php artisan migrate --seed
 
 # Start local server
 php artisan serve
+
 📦 Migrations & Seeders
+
 create_departments_table → Departments
 
 create_employees_table → Employees
@@ -98,11 +100,18 @@ create_employees_table → Employees
 DepartmentsSeeder & EmployeesSeeder
 
 🔐 Authentication
+
 Web: session guard (web)
 
 API: Sanctum tokens
 
+Default admin user:
+
+Email: admin@gmail.com
+Password: admin123
+
 🔗 API — Postman Collection
+
 📌 All API endpoints are documented here:
 👉 Postman Documentation
 
@@ -117,32 +126,32 @@ Filters & Search
 Exports (Excel/PDF)
 
 🔁 Exports
+
 📊 Excel → employees.xlsx via EmployeesExport
 
 📑 PDF → generated from dashboard.employees.print
 
 📝 Logging
+
 Custom channels employee & department in config/logging.php.
 
 Logs include: action, actor, ip, route, changes.
 
 📊 Dashboard
+
 👥 Employees count
 
 🏢 Departments count
 
 ✅ Final Notes
+
 Code is clean, tested, and fully documented.
 
 Ready for extension: Roles/Permissions, Audit history, or advanced reports.
 
 📬 Contact
-👤 Author: Ibrahim Khashaba
-📧 Email: ibrahimahmedkhashaba@gmail.com
-📱 Whatsapp: +201124782711
-Ready for extension: Roles/Permissions, Audit history, or advanced reports.
 
-📬 Contact
 👤 Author: Ibrahim Khashaba
 📧 Email: ibrahimahmedkhashaba@gmail.com
+
 📱 Whatsapp: +201124782711
