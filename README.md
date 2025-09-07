@@ -91,6 +91,8 @@ php artisan migrate --seed
 # Start local server
 php artisan serve
 
+---
+
 📦 Migrations & Seeders
 
 create_departments_table → Departments
