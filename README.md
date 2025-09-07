@@ -1,61 +1,302 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📘 Technical Assessment
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 👨‍💻 Project
+**Employee & Department Management System**
 
-## About Laravel
+## 🏢 For
+**Devly Solutions**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🧭 Overview
+This project is an **Employee & Department Management System** built with **Laravel 12**.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+It fully implements all requirements of the technical assessment, including:
+- CRUD for employees and departments
+- Filters & search
+- Authentication
+- Dashboard
+- Exports (Excel/PDF)
+- Logging
 
-## Learning Laravel
+> ✅ Every feature was implemented precisely — migrations, seeders, validations, filters, exports, and logging.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## ✨ Key Features
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🔹 Departments
+- Full CRUD (create, update, delete, list).
+- Search & filter support.
+- Logging for all actions.
 
-## Laravel Sponsors
+### 🔹 Employees
+- Full CRUD (name, email, salary, department).
+- Search & filter by department.
+- Logging for create/update/delete.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 🔹 Logging
+- Employees logs → `storage/logs/employee.log`
+- Departments logs → `storage/logs/department.log`
+- Each log includes: **action, actor (id, name, email), ip, route, changes**.
 
-### Premium Partners
+### 🔹 Authentication
+- Admin login with default user:
+Email: admin@gmail.com
+Password: admin123
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+yaml
+نسخ الكود
+- Features: **Login, Logout, Update profile (name/email), Change password**.
 
-## Contributing
+### 🔹 Dashboard
+- Displays total number of **Employees**.
+- Displays total number of **Departments**.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 🔹 Exports
+- Employees exportable to:
+- 📊 Excel (XLSX) *(with optional department filter)*
+- 📑 PDF *(with optional department filter)*
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🛠 Tech Stack
+- 🐘 PHP 8.2+
+- 🚀 Laravel 12
+- 🗄️ MySQL
+- 🔑 Laravel Sanctum (API auth)
+- 📊 maatwebsite/excel (Excel export)
+- 📑 barryvdh/laravel-dompdf (PDF export)
+- 📝 Monolog (logging)
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🔧 Setup (Local)
+```bash
+# Clone project
+git clone <repo-url>
+cd <repo-folder>
 
-## License
+# Copy environment
+cp .env.example .env
+# Update DB settings
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Install dependencies
+composer install
+
+# Generate app key
+php artisan key:generate
+
+# Run migrations & seeders
+php artisan migrate --seed
+
+# Start local server
+php artisan serve
+📦 Migrations & Seeders
+create_departments_table → Departments
+
+create_employees_table → Employees
+
+DepartmentsSeeder & EmployeesSeeder
+
+🔐 Authentication
+Web: session guard (web)
+
+API: Sanctum tokens
+
+🔗 API — Postman Collection
+📌 All API endpoints are documented here:
+👉 Postman Documentation
+
+Includes:
+
+Login / Logout
+
+Employees & Departments CRUD
+
+Filters & Search
+
+Exports (Excel/PDF)
+
+🔁 Exports
+📊 Excel → employees.xlsx via EmployeesExport
+
+📑 PDF → generated from dashboard.employees.print
+
+📝 Logging
+Custom channels employee & department in config/logging.php.
+
+Logs include: action, actor, ip, route, changes.
+
+📊 Dashboard
+👥 Employees count
+
+🏢 Departments count
+
+✅ Final Notes
+Code is clean, tested, and fully documented.
+
+Ready for extension: Roles/Permissions, Audit history, or advanced reports.
+
+📬 Contact
+👤 Author: Ibrahim Khashaba
+📧 Email: ibrahimahmedkhashaba@gmail.com
+📱 Whatsapp: +201124782711
+
+نسخ الكود
+
+
+
+
+
+أنت قلت:
+يا عم كلهم ف markdown واحد
+
+
+قال ChatGPT:
+markdown
+نسخ الكود
+# 📘 Technical Assessment
+
+## 👨‍💻 Project
+**Employee & Department Management System**
+
+## 🏢 For
+**Devly Solutions**
+
+---
+
+## 🧭 Overview
+This project is an **Employee & Department Management System** built with **Laravel 12**.
+
+It fully implements all requirements of the technical assessment, including:
+- CRUD for employees and departments
+- Filters & search
+- Authentication
+- Dashboard
+- Exports (Excel/PDF)
+- Logging
+
+> ✅ Every feature was implemented precisely — migrations, seeders, validations, filters, exports, and logging.
+
+---
+
+## ✨ Key Features
+
+### 🔹 Departments
+- Full CRUD (create, update, delete, list).
+- Search & filter support.
+- Logging for all actions.
+
+### 🔹 Employees
+- Full CRUD (name, email, salary, department).
+- Search & filter by department.
+- Logging for create/update/delete.
+
+### 🔹 Logging
+- Employees logs → `storage/logs/employee.log`
+- Departments logs → `storage/logs/department.log`
+- Each log includes: **action, actor (id, name, email), ip, route, changes**.
+
+### 🔹 Authentication
+- Admin login with default user:
+Email: admin@gmail.com
+Password: admin123
+
+yaml
+نسخ الكود
+- Features: **Login, Logout, Update profile (name/email), Change password**.
+
+### 🔹 Dashboard
+- Displays total number of **Employees**.
+- Displays total number of **Departments**.
+
+### 🔹 Exports
+- Employees exportable to:
+- 📊 Excel (XLSX) *(with optional department filter)*
+- 📑 PDF *(with optional department filter)*
+
+---
+
+## 🛠 Tech Stack
+- 🐘 PHP 8.2+
+- 🚀 Laravel 12
+- 🗄️ MySQL
+- 🔑 Laravel Sanctum (API auth)
+- 📊 maatwebsite/excel (Excel export)
+- 📑 barryvdh/laravel-dompdf (PDF export)
+- 📝 Monolog (logging)
+
+---
+
+## 🔧 Setup (Local)
+```bash
+# Clone project
+git clone <repo-url>
+cd <repo-folder>
+
+# Copy environment
+cp .env.example .env
+# Update DB settings
+
+# Install dependencies
+composer install
+
+# Generate app key
+php artisan key:generate
+
+# Run migrations & seeders
+php artisan migrate --seed
+
+# Start local server
+php artisan serve
+📦 Migrations & Seeders
+create_departments_table → Departments
+
+create_employees_table → Employees
+
+DepartmentsSeeder & EmployeesSeeder
+
+🔐 Authentication
+Web: session guard (web)
+
+API: Sanctum tokens
+
+🔗 API — Postman Collection
+📌 All API endpoints are documented here:
+👉 https://documenter.getpostman.com/view/40282253/2sB3Hkr1dw
+
+Includes:
+
+Login / Logout
+
+Employees & Departments CRUD
+
+Filters & Search
+
+Exports (Excel/PDF)
+
+🔁 Exports
+📊 Excel → employees.xlsx via EmployeesExport
+
+📑 PDF → generated from dashboard.employees.print
+
+📝 Logging
+Custom channels employee & department in config/logging.php.
+
+Logs include: action, actor, ip, route, changes.
+
+📊 Dashboard
+👥 Employees count
+
+🏢 Departments count
+
+✅ Final Notes
+Code is clean, tested, and fully documented.
+
+Ready for extension: Roles/Permissions, Audit history, or advanced reports.
+
+📬 Contact
+👤 Author: Ibrahim Khashaba
+📧 Email: ibrahimahmedkhashaba@gmail.com
+📱 Whatsapp: +201124782711
