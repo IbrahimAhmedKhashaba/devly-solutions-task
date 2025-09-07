@@ -1,95 +1,120 @@
-README
+📘 Technical Assessment
 
-Project: Technical Assessment
-For: Devly Solutions
+👨‍💻 Project: Employee & Department Management System
+🏢 For: Devly Solutions
 
 🧭 Overview
 
-This project is an Employee & Department Management System built with Laravel 11.
-It implements all requirements of the technical assessment including CRUD for employees and departments, filters, search, authentication, dashboard, exports, and logging.
+This project is an Employee & Department Management System built with Laravel 12.
+It fully implements all requirements of the technical assessment including:
 
-Every feature was implemented precisely — migrations, seeders, validations, filters, exports, and logging.
+CRUD for employees and departments
 
-✅ Key Features
+Filters & search
 
-Departments CRUD (create, update, delete, list).
+Authentication
 
-Employees CRUD (name, email, phone, salary, department, status).
+Dashboard
 
-Filters:
+Exports (Excel/PDF)
 
-Filter employees by department.
+Logging
 
-Filter employees by status.
+✅ Every feature was implemented precisely — migrations, seeders, validations, filters, exports, and logging.
 
-Filter departments by name.
+✨ Key Features
+🔹 Departments
 
-Search for employees and departments.
+Full CRUD (create, update, delete, list).
 
-Logging:
+Search & filter support.
 
-Employee actions (create, update, delete).
+Logging for all actions.
 
-Department actions (create, update, delete).
+🔹 Employees
 
-All logs saved in storage/logs/employee.log.
+Full CRUD (name, email, salary, department).
 
-Authentication:
+Search & filter by department.
+
+Logging for create/update/delete.
+
+🔹 Logging
+
+Employees logs → storage/logs/employee.log
+
+Departments logs → storage/logs/department.log
+
+Each log includes: action, actor (id, name, email), ip, route, changes.
+
+🔹 Authentication
 
 Admin login with default user:
 
 Email: admin@gmail.com
-
 Password: admin123
 
-Profile management (update name, email, and password).
 
-Dashboard:
+Features: Login, Logout, Update profile (name/email), Change password.
 
-Total number of employees.
+🔹 Dashboard
 
-Total number of departments.
+Displays total number of Employees.
 
-Exports:
+Displays total number of Departments.
 
-Employees to Excel (XLSX) and PDF with optional department filter.
+🔹 Exports
 
-🛠️ Tech Stack
+Employees exportable to:
 
-PHP 8.2+
+📊 Excel (XLSX)
 
-Laravel 11
+📑 PDF (with optional department filter).
 
-MySQL
+🛠 Tech Stack
 
-Laravel Sanctum (API auth)
+🐘 PHP 8.2+
 
-maatwebsite/excel (Excel export)
+🚀 Laravel 12
 
-barryvdh/laravel-dompdf (PDF export)
+🗄️ MySQL
 
-Monolog (logging)
+🔑 Laravel Sanctum (API auth)
+
+📊 maatwebsite/excel (Excel export)
+
+📑 barryvdh/laravel-dompdf (PDF export)
+
+📝 Monolog (logging)
 
 🔧 Setup (Local)
+# Clone project
 git clone <repo-url>
 cd <repo-folder>
 
+# Copy environment
 cp .env.example .env
 # Update DB settings
 
+# Install dependencies
 composer install
+
+# Generate app key
 php artisan key:generate
+
+# Run migrations & seeders
 php artisan migrate --seed
 
+# Start local server
 php artisan serve
 
 📦 Migrations & Seeders
 
-create_departments_table — Departments.
+create_departments_table → Departments
 
-create_employees_table — Employees.
+create_employees_table → Employees
 
-Seeders: DepartmentsSeeder & EmployeesSeeder.
+DepartmentsSeeder & EmployeesSeeder
 
 🔐 Authentication
 
@@ -97,80 +122,49 @@ Web: session guard (web).
 
 API: Sanctum tokens.
 
-Default admin credentials:
-
-Email: admin@gmail.com
-Password: admin123
-
-
-Features:
-
-Login / Logout.
-
-Update profile (name, email).
-
-Change password.
-
 🔗 API — Postman Collection
 
+📌 All API endpoints are documented here:
 👉 Postman Documentation
 
-Includes login, employees & departments CRUD, filters, search, and exports.
+Includes:
+
+Login / Logout
+
+Employees & Departments CRUD
+
+Filters & Search
+
+Exports (Excel/PDF)
 
 🔁 Exports
 
-Excel — employees.xlsx via EmployeesExport.
+📊 Excel → employees.xlsx via EmployeesExport
 
-PDF — generated from dashboard.employees.print.
+📑 PDF → generated from dashboard.employees.print
 
 📝 Logging
 
-Custom channel employee in config/logging.php.
+Custom channel employee & department in config/logging.php.
 
-Logs created for employees and departments actions.
-
-Context: action, actor (id, name, email), ip, route, changes.
-
-✅ Main Endpoints
-
-POST /api/auth/login — Login.
-
-POST /api/auth/logout — Logout.
-
-GET /api/employees — List employees (filters & search).
-
-POST /api/employees — Create employee.
-
-PUT /api/employees/{id} — Update employee.
-
-DELETE /api/employees/{id} — Delete employee.
-
-GET /api/employees/export/{department?}/{type} — Export employees.
-
-GET /api/departments — List departments (filters & search).
-
-POST /api/departments — Create department.
-
-PUT /api/departments/{id} — Update department.
-
-DELETE /api/departments/{id} — Delete department.
+Logs include: action, actor, ip, route, changes.
 
 📊 Dashboard
 
-Displays count of employees.
+👥 Employees count
 
-Displays count of departments.
+🏢 Departments count
 
-Final Notes
+✅ Final Notes
 
-Code is clean, fully documented, and meets all technical requirements.
+Code is clean, tested, and fully documented.
 
-Extensions such as Roles/Permissions, Audit history, or advanced reports can be added easily.
+Ready for extension: Roles/Permissions, Audit history, or advanced reports.
 
-Contact
+📬 Contact
 
 Devly Solutions
-Author: Ibrahim Khashaba
-Email: ibrahimahmedkhashaba@gmail.com
+👤 Author: Ibrahim Khashaba
+📧 Email: ibrahimahmedkhashaba@gmail.com
 
-Whatsapp: +201124782711
+📱 Whatsapp: +201124782711
