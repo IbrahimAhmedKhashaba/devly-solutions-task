@@ -1,75 +1,72 @@
-# 📘 Technical Assessment
+# 🚀 Technical Assessment  
 
-## 👨‍💻 Project
-**Employee & Department Management System**
+## 📌 Project  
+**Employee & Department Management System**  
 
-## 🏢 For
-**Devly Solutions**
-
----
-
-## 🧭 Overview
-This project is an **Employee & Department Management System** built with **Laravel 12**.
-
-It fully implements all requirements of the technical assessment, including:
-- CRUD for employees and departments
-- Filters & search
-- Authentication
-- Dashboard
-- Exports (Excel/PDF)
-- Logging
-
-> ✅ Every feature was implemented precisely — migrations, seeders, validations, filters, exports, and logging.
+## 🏢 Company  
+**Devly Solutions**  
 
 ---
 
-## ✨ Key Features
+## 🧭 Overview  
+A complete **Employee & Department Management System** built with **Laravel 12**.  
 
-### 🔹 Departments
-- Full CRUD (create, update, delete, list).
-- Search & filter support.
-- Logging for all actions.
-
-### 🔹 Employees
-- Full CRUD (name, email, salary, department).
-- Search & filter by department.
-- Logging for create/update/delete.
-
-### 🔹 Logging
-- Employees logs → `storage/logs/employee.log`
-- Departments logs → `storage/logs/department.log`
-- Each log includes: **action, actor (id, name, email), ip, route, changes**.
-
-### 🔹 Authentication
-- Admin login with default user:
-Email: admin@gmail.com
-Password: admin123
-
-- Features: **Login, Logout, Update profile (name/email), Change password**.
-
-### 🔹 Dashboard
-- Displays total number of **Employees**.
-- Displays total number of **Departments**.
-
-### 🔹 Exports
-- Employees exportable to:
-- 📊 Excel (XLSX) *(with optional department filter)*
-- 📑 PDF *(with optional department filter)*
+✔ Implements **all technical assessment requirements**:  
+- CRUD for Employees & Departments  
+- Search & Filters  
+- Authentication  
+- Dashboard  
+- Exports (Excel / PDF)  
+- Detailed Logging  
 
 ---
 
-## 🛠 Tech Stack
-- 🐘 PHP 8.2+
-- 🚀 Laravel 12
-- 🗄️ MySQL
-- 🔑 Laravel Sanctum (API auth)
-- 📊 maatwebsite/excel (Excel export)
-- 📑 barryvdh/laravel-dompdf (PDF export)
-- 📝 Monolog (logging)
+## ✨ Core Features  
+
+### 🏢 Departments  
+- 🔹 Full CRUD (create / update / delete / list)  
+- 🔹 Search & filter support  
+- 🔹 Action logging  
+
+### 👥 Employees  
+- 🔹 Full CRUD (name, email, salary, department)  
+- 🔹 Search & filter by department  
+- 🔹 Action logging  
+
+### 📝 Logging  
+- 📂 Employees → `storage/logs/employee.log`  
+- 📂 Departments → `storage/logs/department.log`  
+- 🔍 Each log entry includes: **action, actor (id, name, email), IP, route, changes**  
+
+### 🔐 Authentication  
+- Admin login (default credentials):  
+  - **Email:** `admin@gmail.com`  
+  - **Password:** `admin123`  
+- Features: Login, Logout, Update profile, Change password  
+
+### 📊 Dashboard  
+- 👥 Total Employees count  
+- 🏢 Total Departments count  
+
+### 📤 Exports  
+- 📊 **Excel (XLSX)** → optional department filter  
+- 📑 **PDF** → optional department filter  
 
 ---
 
-## 🔧 Setup (Local)
+## 🛠 Tech Stack  
+- 🐘 **PHP 8.2+**  
+- 🚀 **Laravel 12**  
+- 🗄️ **MySQL**  
+- 🔑 **Laravel Sanctum** (API auth)  
+- 📊 **maatwebsite/excel** (Excel export)  
+- 📑 **barryvdh/laravel-dompdf** (PDF export)  
+- 📝 **Monolog** (custom logging)  
+
+---
+
+## ⚙️ Setup (Local)  
+
 ```bash
 # Clone project
 git clone <repo-url>
@@ -88,73 +85,71 @@ php artisan key:generate
 # Run migrations & seeders
 php artisan migrate --seed
 
-# Start local server
-php artisan serve
+## 📦 Database & Seeders  
+
+- `create_departments_table` → Departments  
+- `create_employees_table` → Employees  
+- `DepartmentsSeeder` & `EmployeesSeeder`  
 
 ---
 
-### 🔹 Authentication
-📦 Migrations & Seeders
+## 🔗 API Documentation  
 
-create_departments_table → Departments
+👉 [Postman Collection](https://documenter.getpostman.com/view/40282253/2sB3Hkr1dw)  
 
-create_employees_table → Employees
+### 📑 Endpoints  
 
-DepartmentsSeeder & EmployeesSeeder
+#### 🔐 Authentication  
+| Method | Endpoint       | Description  | Auth Required |
+|--------|----------------|--------------|---------------|
+| POST   | `/api/login`   | Login user   | No            |
+| POST   | `/api/logout`  | Logout user  | Yes           |
 
-🔐 Authentication
+#### 📊 Dashboard  
+| Method | Endpoint          | Description                  | Auth Required |
+|--------|-------------------|------------------------------|---------------|
+| GET    | `/api/dashboard`  | Get employees & departments count | Yes       |
 
-Web: session guard (web)
+#### 👤 Profile  
+| Method | Endpoint              | Description              | Auth Required |
+|--------|-----------------------|--------------------------|---------------|
+| GET    | `/api/profile`        | Get authenticated user   | Yes           |
+| PUT    | `/api/profile/update` | Update name & email      | Yes           |
+| PUT    | `/api/profile/password` | Update password        | Yes           |
 
-API: Sanctum tokens
+#### 👥 Employees  
+| Method | Endpoint                     | Description                | Auth Required |
+|--------|------------------------------|----------------------------|---------------|
+| GET    | `/api/employees`             | List all employees         | Yes           |
+| GET    | `/api/employees/{id}`        | Get employee by ID         | Yes           |
+| POST   | `/api/employees`             | Create new employee        | Yes           |
+| PUT    | `/api/employees/{id}`        | Update employee by ID      | Yes           |
+| DELETE | `/api/employees/{id}`        | Delete employee by ID      | Yes           |
+| GET    | `/api/employees/export/excel`| Export employees to Excel  | Yes           |
+| GET    | `/api/employees/export/pdf`  | Export employees to PDF    | Yes           |
 
-Default admin user:
+#### 🏢 Departments  
+| Method | Endpoint                       | Description                 | Auth Required |
+|--------|--------------------------------|-----------------------------|---------------|
+| GET    | `/api/departments`             | List all departments        | Yes           |
+| GET    | `/api/departments/{id}`        | Get department by ID        | Yes           |
+| POST   | `/api/departments`             | Create new department       | Yes           |
+| PUT    | `/api/departments/{id}`        | Update department by ID     | Yes           |
+| DELETE | `/api/departments/{id}`        | Delete department by ID     | Yes           |
 
-Email: admin@gmail.com
-Password: admin123
+---
 
-🔗 API — Postman Collection
+## ✅ Final Notes  
 
-📌 All API endpoints are documented here:
-👉 [Postman Documentation](https://documenter.getpostman.com/view/40282253/2sB3Hkr1dw)
+- 🧹 Codebase: clean, tested, and documented  
+- 🛠 Ready for extension: Roles/Permissions, Audit history, Advanced reports  
 
-Includes:
+---
 
-Login / Logout
+## 📬 Contact  
 
-Employees & Departments CRUD
-
-Filters & Search
-
-Exports (Excel/PDF)
-
-🔁 Exports
-
-📊 Excel → employees.xlsx via EmployeesExport
-
-📑 PDF → generated from dashboard.employees.print
-
-📝 Logging
-
-Custom channels employee & department in config/logging.php.
-
-Logs include: action, actor, ip, route, changes.
-
-📊 Dashboard
-
-👥 Employees count
-
-🏢 Departments count
-
-✅ Final Notes
-
-Code is clean, tested, and fully documented.
-
-Ready for extension: Roles/Permissions, Audit history, or advanced reports.
-
-📬 Contact
-
-👤 Author: Ibrahim Khashaba
-📧 Email: ibrahimahmedkhashaba@gmail.com
-
-📱 Whatsapp: +201124782711
+👤 **Author:** Ibrahim Khashaba  
+📧 **Email:** ibrahimahmedkhashaba@gmail.com  
+📱 **WhatsApp:** [+20 112 478 2711](https://wa.me/201124782711)  
+# Start local server
+php artisan serve
