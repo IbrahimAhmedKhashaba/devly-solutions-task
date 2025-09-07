@@ -116,7 +116,7 @@ Password: admin123
 🔗 API — Postman Collection
 
 📌 All API endpoints are documented here:
-👉 Postman Documentation
+👉 [Postman Documentation](https://documenter.getpostman.com/view/40282253/2sB3Hkr1dw)
 
 Includes:
 
