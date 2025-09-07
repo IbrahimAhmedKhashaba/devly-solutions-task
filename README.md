@@ -1,208 +1,176 @@
-# README
+README
 
-**Project:** Smart Clinic - Technical Assessment
+Project: Technical Assessment
+For: Devly Solutions
 
-**For:** Devly Solutions
+🧭 Overview
 
----
+This project is an Employee & Department Management System built with Laravel 11.
+It implements all requirements of the technical assessment including CRUD for employees and departments, filters, search, authentication, dashboard, exports, and logging.
 
-## 🧭 Overview
+Every feature was implemented precisely — migrations, seeders, validations, filters, exports, and logging.
 
-This project is an **Employee Management System** implemented fully according to the provided technical assessment specifications. It is built with Laravel and covers CRUD operations for Employees and Departments, RESTful API, exporting reports (Excel/PDF), and action logging to a dedicated file.
+✅ Key Features
 
-> Every part of the requirements was implemented precisely — migrations, seeders, validations, filters, and exports.
+Departments CRUD (create, update, delete, list).
 
----
+Employees CRUD (name, email, phone, salary, department, status).
 
-## ✅ Key Features
+Filters:
 
-* Full CRUD for employees (Name, Email, Department, Salary).
-* Departments module with One-to-Many relationship (each employee belongs to a department).
-* Employee list with department name, filter by department, and pagination (10 rows/page).
-* RESTful API for employees, protected with Laravel Sanctum token auth.
-* Export employees list to Excel (XLSX) and PDF with department filter option.
-* Logging of important actions (created, updated, deleted) to a dedicated log file `storage/logs/employee.log` including actor info (id, name, email), IP, and route.
-* Migrations & Seeders for Departments and Employees.
+Filter employees by department.
 
----
+Filter employees by status.
 
-## 🛠️ Tech Stack
+Filter departments by name.
 
-* PHP 8.2+
-* Laravel 11
-* MySQL
-* Laravel Sanctum (API auth)
-* maatwebsite/excel (Excel export)
-* barryvdh/laravel-dompdf (PDF export)
-* Monolog (logging)
+Search for employees and departments.
 
----
+Logging:
 
-## 🔧 Setup (Local)
+Employee actions (create, update, delete).
 
-1. Clone the project:
+Department actions (create, update, delete).
 
-```bash
+All logs saved in storage/logs/employee.log.
+
+Authentication:
+
+Admin login with default user:
+
+Email: admin@gmail.com
+
+Password: admin123
+
+Profile management (update name, email, and password).
+
+Dashboard:
+
+Total number of employees.
+
+Total number of departments.
+
+Exports:
+
+Employees to Excel (XLSX) and PDF with optional department filter.
+
+🛠️ Tech Stack
+
+PHP 8.2+
+
+Laravel 11
+
+MySQL
+
+Laravel Sanctum (API auth)
+
+maatwebsite/excel (Excel export)
+
+barryvdh/laravel-dompdf (PDF export)
+
+Monolog (logging)
+
+🔧 Setup (Local)
 git clone <repo-url>
 cd <repo-folder>
-```
 
-2. Copy environment file:
-
-```bash
 cp .env.example .env
-# Edit DB_CONNECTION, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD
-```
+# Update DB settings
 
-3. Install dependencies:
-
-```bash
 composer install
-npm install && npm run build # if frontend exists
-```
-
-4. Generate app key:
-
-```bash
 php artisan key:generate
-```
-
-5. Run migrations and seeders:
-
-```bash
 php artisan migrate --seed
-```
 
-6. Link storage (for exports and file access):
-
-```bash
-php artisan storage:link
-```
-
-7. Clear caches (optional):
-
-```bash
-php artisan config:clear
-php artisan route:clear
-php artisan cache:clear
-```
-
-8. Start local server:
-
-```bash
 php artisan serve
-```
 
----
+📦 Migrations & Seeders
 
-## 📦 Migrations & Seeders
+create_departments_table — Departments.
 
-* `create_departments_table` — Departments table.
-* `create_employees_table` — Employees table (id, name, email, salary, department\_id, status, timestamps).
-* Seeders: DepartmentsSeeder & EmployeesSeeder.
+create_employees_table — Employees.
 
----
+Seeders: DepartmentsSeeder & EmployeesSeeder.
 
-## 🔐 Authentication
+🔐 Authentication
 
-* Web uses `web` guard (session-based).
-* API is protected with **Sanctum tokens**:
+Web: session guard (web).
 
-  * `POST /api/auth/login` with {email, password} returns `token`.
-  * Use header `Authorization: Bearer {token}` for protected API requests.
+API: Sanctum tokens.
 
----
+Default admin credentials:
 
-## 🔗 API — Postman Collection
+Email: admin@gmail.com
+Password: admin123
 
-All API endpoints are documented in Postman collection:
-👉 [https://documenter.getpostman.com/view/40282253/2sB3Hkr1dw](https://documenter.getpostman.com/view/40282253/2sB3Hkr1dw)
 
-This includes login, employees CRUD, and export endpoints.
+Features:
 
----
+Login / Logout.
 
-## 🔁 Exports
+Update profile (name, email).
 
-Two approaches available:
+Change password.
 
-### 1. Direct download (stream)
+🔗 API — Postman Collection
 
-* Excel: Generates `employees.xlsx` via `EmployeesExport`.
-* PDF: Generates PDF from `dashboard.employees.print` view.
+👉 Postman Documentation
 
-### 2. Save & return URL
+Includes login, employees & departments CRUD, filters, search, and exports.
 
-* Files are saved under `storage/app/public/exports`.
-* Returns public URL via `Storage::disk('public')->url($path)`.
-* Recommended for large exports or async jobs.
+🔁 Exports
 
----
+Excel — employees.xlsx via EmployeesExport.
 
-## 📝 Logging
+PDF — generated from dashboard.employees.print.
 
-* Custom channel in `config/logging.php`:
+📝 Logging
 
-```php
-'employee' => [
-    'driver' => 'single',
-    'path' => storage_path('logs/employee.log'),
-    'level' => 'info',
-],
-```
+Custom channel employee in config/logging.php.
 
-* Logs are recorded inside `Employee` model events: `created`, `updated`, `deleted`.
-* Context includes: `action`, `actor` (id, name, email, guard), `employee`/`changes`, `ip`, `route`.
+Logs created for employees and departments actions.
 
----
+Context: action, actor (id, name, email), ip, route, changes.
 
-## ✅ Main Endpoints
+✅ Main Endpoints
 
-* `POST /api/auth/login` — Login (returns token).
-* `POST /api/auth/logout` — Logout (delete token).
-* `GET /api/employees` — List employees (with `?department=ID` & pagination).
-* `POST /api/employees` — Create employee.
-* `PUT /api/employees/{id}` — Update employee.
-* `DELETE /api/employees/{id}` — Delete employee.
-* `GET /api/employees/export/{department?}/{type}` — Export (`type = excel|pdf`).
+POST /api/auth/login — Login.
 
----
+POST /api/auth/logout — Logout.
 
-## 🧪 Testing
+GET /api/employees — List employees (filters & search).
 
-* PHPUnit ready (`phpunit.xml`).
-* API can be tested via Postman collection.
+POST /api/employees — Create employee.
 
----
+PUT /api/employees/{id} — Update employee.
 
-## ⚙️ Deployment
+DELETE /api/employees/{id} — Delete employee.
 
-* Run:
+GET /api/employees/export/{department?}/{type} — Export employees.
 
-```bash
-composer install --optimize-autoloader --no-dev
-php artisan migrate --force
-```
+GET /api/departments — List departments (filters & search).
 
-* Configure `.env` (DB, APP\_KEY, APP\_ENV).
-* Run queue workers if needed:
+POST /api/departments — Create department.
 
-```bash
-php artisan queue:work --tries=3
-```
+PUT /api/departments/{id} — Update department.
 
-* Ensure storage permissions and `php artisan storage:link`.
+DELETE /api/departments/{id} — Delete department.
 
----
+📊 Dashboard
 
-## Final Notes
+Displays count of employees.
 
-* Code quality, documentation, and compliance with requirements are ensured.
-* Extensions such as Roles & Permissions, Audit history, or Export history can be easily added.
+Displays count of departments.
 
----
+Final Notes
 
-## Contact
+Code is clean, fully documented, and meets all technical requirements.
 
-**Devly Solutions**
+Extensions such as Roles/Permissions, Audit history, or advanced reports can be added easily.
+
+Contact
+
+Devly Solutions
 Author: Ibrahim Khashaba
+Email: ibrahimahmedkhashaba@gmail.com
+
+Whatsapp: +201124782711
