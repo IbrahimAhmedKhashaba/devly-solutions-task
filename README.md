@@ -67,7 +67,7 @@ Displays total number of Departments.
 
 Employees exportable to:
 
-📊 Excel (XLSX)
+📊 Excel (XLSX)(with optional department filter)
 
 📑 PDF (with optional department filter).
 
@@ -164,7 +164,9 @@ Ready for extension: Roles/Permissions, Audit history, or advanced reports.
 📬 Contact
 
 Devly Solutions
+
 👤 Author: Ibrahim Khashaba
+
 📧 Email: ibrahimahmedkhashaba@gmail.com
 
 📱 Whatsapp: +201124782711
